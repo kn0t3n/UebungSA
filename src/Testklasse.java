@@ -45,6 +45,8 @@ public class Testklasse {
 
         kaufService.textFileAuslesen();
 
+        System.out.println(kaufService.toJSON(kauf0));
+
 
     }
 

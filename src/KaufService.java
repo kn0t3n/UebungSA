@@ -1,3 +1,6 @@
+import com.fasterxml.jackson.core.JsonGenerator;
+import netscape.javascript.JSObject;
+
 import java.io.*;
 import java.sql.*;
 import java.util.ArrayList;
@@ -95,6 +98,15 @@ public class KaufService {
                 e.printStackTrace();
             }
         }
+    }
+
+
+        public String toJSON(Kauf kauf) {
+            return "{ \"Geburtsdatum\": \"" + kauf.getPerson().getGeburtsdatum() + "\", \"nachname\": \"" + kauf.getPerson().getNachname()
+                    + "\", \"Vorname\": \"" + kauf.getPerson().getVorname() + "\", \"kaufdatum\": \""
+                    + kauf.getKaufDatum() + "\", \"goldInGramm\": \"" + kauf.getGoldInGramm()
+                    + "\", \"GoldImWertVonEuro\": \"" + kauf.getGoldImWertVonEuro() + "\" }";
+
     }
 
 
