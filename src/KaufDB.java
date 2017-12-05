@@ -14,23 +14,23 @@ public class KaufDB {
         return kaufListeDB;
     }
 
-    public boolean addKauf(Kauf kauf){
+    public boolean addKauf(Kauf kauf) {
         return this.kaufListeDB.add(kauf);
     }
 
-    public boolean addKauf(Person person, long kaufdatum, int goldInGramm){
+    public boolean addKauf(Person person, long kaufdatum, int goldInGramm) {
         return this.kaufListeDB.add(new Kauf(person, kaufdatum, goldInGramm));
     }
 
-    public boolean addKauf(String geburtsdatum, String nachname, String vorname, long kaufDatum, int goldInGramm){
-        return this.kaufListeDB.add(new Kauf (new Person(geburtsdatum, nachname, vorname), kaufDatum, goldInGramm));
+    public boolean addKauf(String geburtsdatum, String nachname, String vorname, long kaufDatum, int goldInGramm) {
+        return this.kaufListeDB.add(new Kauf(new Person(geburtsdatum, nachname, vorname), kaufDatum, goldInGramm));
     }
 
-    public Kauf remove(long kaufDatum){
+    public Kauf remove(long kaufDatum) {
         Iterator<Kauf> iter = kaufListeDB.iterator();
-        while(iter.hasNext()){
+        while (iter.hasNext()) {
             Kauf nextKauf = iter.next();
-            if(nextKauf.getKaufDatum() == kaufDatum){
+            if (nextKauf.getKaufDatum() == kaufDatum) {
                 iter.remove();
                 return nextKauf;
             }
@@ -38,26 +38,28 @@ public class KaufDB {
         return null;
     }
 
-    public Kauf getLastItem(){
+    public Kauf getLastItem() {
         if (this.kaufListeDB != null) {
             return this.kaufListeDB.get(this.kaufListeDB.size() - 1);
-        } return null;
+        }
+        return null;
     }
 
-    public Kauf getFirstItem(){
+    public Kauf getFirstItem() {
         if (this.kaufListeDB != null) {
             return this.kaufListeDB.get(0);
-        } return null;
+        }
+        return null;
     }
 
-    public int getSize(){
+    public int getSize() {
         return this.kaufListeDB.size();
     }
 
-    public List getBetweenTimestamps(long beginTime, long endTime){
+    public List getBetweenTimestamps(long beginTime, long endTime) {
         List<Kauf> kaufListeZeitraum = new ArrayList<>();
-        for (Kauf kauf: this.kaufListeDB) {
-            if(kauf.getKaufDatum()>= beginTime && kauf.getKaufDatum() <= endTime){
+        for (Kauf kauf : this.kaufListeDB) {
+            if (kauf.getKaufDatum() >= beginTime && kauf.getKaufDatum() <= endTime) {
                 kaufListeZeitraum.add(kauf);
             }
         }
@@ -81,8 +83,10 @@ public class KaufDB {
 
     @Override
     public String toString() {
-        return "KaufDB{" +
-                "kaufListeDB=" + kaufListeDB +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        for(Kauf kauf: kaufListeDB){
+            stringBuilder.append(kauf.toString() + String.format("%n"));
+        }
+        return stringBuilder.toString();
     }
 }

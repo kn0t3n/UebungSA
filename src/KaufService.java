@@ -1,4 +1,6 @@
+import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class KaufService {
@@ -9,7 +11,7 @@ public class KaufService {
 
     public KaufService() throws SQLException {
         this.connection = DriverManager.getConnection(URLSQL);
-        this.preparedStatementSelect = connection.prepareStatement("SELECT geburtsdatum, nachname, vorname, kaufdatum, goldingramm, goldimwertvoneuro FROM kauf");
+        this.preparedStatementSelect = connection.prepareStatement("SELECT geburtsdatum, nachname, vorname, kaufdatum, goldingramm, goldimwertvoneuro FROM kauf ORDER BY kaufdatum");
         this.preparedStatementInput = connection.prepareStatement("INSERT INTO kauf(geburtsdatum, nachname, vorname, kaufdatum, goldingramm, goldimwertvoneuro) VALUES (?,?,?,?,?,?)");
     }
 
@@ -52,6 +54,47 @@ public class KaufService {
             kaufDB.addKauf(kauf);
         }
         return kaufDB;
+    }
+
+    public boolean datenbankInTextFile(KaufDB kaufDB)  {
+
+        BufferedWriter bufferedWriter = null;
+
+        String text = null;
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter("datenbank.txt", true));
+            bufferedWriter.write(kaufDB.toString());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                bufferedWriter.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return true;
+    }
+
+    public void textFileAuslesen(){
+        BufferedReader bufferedReader = null;
+        String line;
+        try {
+            bufferedReader = new BufferedReader(new FileReader("datenbank.txt"));
+            while((line = bufferedReader.readLine()) != null){
+                System.out.println(line);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }finally {
+            try {
+                bufferedReader.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

@@ -78,11 +78,15 @@ public class Kauf {
 
     @Override
     public String toString() {
-        return "Kauf{" +
-                "person=" + person +
-                ", kaufDatum=" + kaufDatum +
-                ", goldInGramm=" + goldInGramm +
-                ", goldImWertVonEuro=" + goldImWertVonEuro +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append(person.toString() + String.format("%n"));
+        stringBuilder.append("Kaufdatum: "+ kaufDatum + " GoldInGramm: "+  goldInGramm + " GoldImWertVonEuro: " + goldImWertVonEuro+ String.format("%n"));
+        return stringBuilder.toString();
+//        return "Kauf{" +
+//                "person=" + person + '\'' +
+//                ", kaufDatum=" + kaufDatum + '\'' +
+//                ", goldInGramm=" + goldInGramm + '\'' +
+//                ", goldImWertVonEuro=" + goldImWertVonEuro + '\'' +
+//                '}';
     }
 }

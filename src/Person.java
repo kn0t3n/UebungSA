@@ -58,10 +58,13 @@ public class Person {
 
     @Override
     public String toString() {
-        return "Person{" +
-                "geburtsdatum='" + geburtsdatum + '\'' +
-                ", nachname='" + nachname + '\'' +
-                ", vorname='" + vorname + '\'' +
-                '}';
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("GebDatum: " + geburtsdatum + " Nachname: " + nachname +" Vorname: " + vorname + String.format("%n"));
+        return stringBuilder.toString();
+//        return "Person{" +
+//                "geburtsdatum='" + geburtsdatum + '\'' +
+//                ", nachname='" + nachname + '\'' +
+//                ", vorname='" + vorname + '\'' +
+//                '}';
     }
 }
