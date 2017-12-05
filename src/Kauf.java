@@ -5,6 +5,9 @@ public class Kauf {
     private int goldInGramm;
     private double goldImWertVonEuro;
 
+    public Kauf() {
+    }
+
     public Kauf(Person person, long kaufDatum, int goldInGramm) {
         this.person = person;
         this.kaufDatum = kaufDatum;

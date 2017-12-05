@@ -20,9 +20,11 @@ public class Testklasse {
         try {
             kaufService = new KaufService();
             kaufService.saveAllElements(kaufDB.getKaufListeDB());
+            System.out.println(kaufService.readAllElements());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
 
     }
 

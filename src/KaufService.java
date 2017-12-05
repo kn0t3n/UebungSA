@@ -1,7 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
 
 public class KaufService {
@@ -22,7 +19,7 @@ public class KaufService {
     }
 
     public void saveAllElements(List<Kauf> kaufDBS) throws SQLException {
-        for (Kauf kauf :kaufDBS) {
+        for (Kauf kauf : kaufDBS) {
             setPreparedInputStatement(kauf);
             preparedStatementInput.execute();
         }
@@ -35,6 +32,26 @@ public class KaufService {
         preparedStatementInput.setLong(4, kauf.getKaufDatum());
         preparedStatementInput.setInt(5, kauf.getGoldInGramm());
         preparedStatementInput.setDouble(6, kauf.getGoldImWertVonEuro());
+    }
+
+    public KaufDB readAllElements() throws SQLException {
+        KaufDB kaufDB = new KaufDB();
+        ResultSet resultSet = preparedStatementSelect.executeQuery();
+        while (resultSet.next()) {
+            Person person = new Person();
+            Kauf kauf = new Kauf();
+
+            person.setGeburtsdatum(resultSet.getString(1));
+            person.setNachname(resultSet.getString(2));
+            person.setVorname(resultSet.getString(3));
+            kauf.setKaufDatum(resultSet.getLong(4));
+            kauf.setGoldInGramm(resultSet.getInt(5));
+            kauf.setGoldImWertVonEuro(resultSet.getDouble(6));
+
+            kauf.setPerson(person);
+            kaufDB.addKauf(kauf);
+        }
+        return kaufDB;
     }
 
 

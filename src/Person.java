@@ -2,6 +2,9 @@ public class Person {
 
     private String geburtsdatum, nachname, vorname;
 
+    public Person() {
+    }
+
     public Person(String geburtsdatum, String nachname, String vorname) {
         this.geburtsdatum = geburtsdatum;
         this.nachname = nachname;
